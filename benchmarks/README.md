@@ -1,6 +1,6 @@
 # 基准测试材料
 
-两个基准各抽 10 条完整运行，全程只用 DeepSeek V4.1 Flash，以回放 GIF 展示 harness 一步步怎么做，
+MobileWorld 抽 10 条、WebArena-Verified 抽 16 条完整运行，全程只用 DeepSeek V4.1 Flash，以回放 GIF 展示 harness 一步步怎么做，
 以及官方评测器怎么判分。完整结果数据量大，这里只放抽样，不是全量结果。
 
 ## MobileWorld（GUI-only）：10 条抽样，8 条通过、2 条失败
@@ -90,3 +90,36 @@
 
 唯一的失败是 #147：agent 要在 2022 年的订单里找出买过的相框尺寸，在 20 轮规划预算用完时还没查完候选订单；
 评测器判定为 UNKNOWN_ERROR，没有取到数据，判 0 分。
+
+## WebArena-Verified（Reddit / GitLab）：6 条抽样，6 条通过
+
+样本来自 11 月 7 日至 9 日运行的 Reddit 和 GitLab Hard 题，每个站点 3 条，读取、修改类题目都有。
+每条都是该题的第一次运行，每题一个全新的站点容器。
+
+| # | 题号 | 站点 | 官方评分 | 动作 | 用时 | 日期 | 回放 |
+| ---: | ---: | --- | --- | ---: | ---: | --- | --- |
+| 11 | 29 | Reddit | ✅ 1.0 | 9 | 302 秒 | 2026-11-08 | [GIF](webarena/11-WebArena-29-pass.gif) |
+| 12 | 597 | Reddit | ✅ 1.0 | 9 | 456 秒 | 2026-11-08 | [GIF](webarena/12-WebArena-597-pass.gif) |
+| 13 | 603 | Reddit | ✅ 1.0 | 9 | 416 秒 | 2026-11-08 | [GIF](webarena/13-WebArena-603-pass.gif) |
+| 14 | 303 | GitLab | ✅ 1.0 | 6 | 492 秒 | 2026-11-08 | [GIF](webarena/14-WebArena-303-pass.gif) |
+| 15 | 446 | GitLab | ✅ 1.0 | 11 | 561 秒 | 2026-11-09 | [GIF](webarena/15-WebArena-446-pass.gif) |
+| 16 | 747 | GitLab | ✅ 1.0 | 15 | 591 秒 | 2026-11-09 | [GIF](webarena/16-WebArena-747-pass.gif) |
+
+点图看大图：
+
+<table>
+<tr><td align="center" valign="top" width="50%"><a href="webarena/11-WebArena-29-pass.gif"><img src="webarena/11-WebArena-29-pass.gif" width="400" alt="WebArena 29"></a><br><sub>✅ #29 · Reddit</sub></td><td align="center" valign="top" width="50%"><a href="webarena/12-WebArena-597-pass.gif"><img src="webarena/12-WebArena-597-pass.gif" width="400" alt="WebArena 597"></a><br><sub>✅ #597 · Reddit</sub></td></tr>
+<tr><td align="center" valign="top" width="50%"><a href="webarena/13-WebArena-603-pass.gif"><img src="webarena/13-WebArena-603-pass.gif" width="400" alt="WebArena 603"></a><br><sub>✅ #603 · Reddit</sub></td><td align="center" valign="top" width="50%"><a href="webarena/14-WebArena-303-pass.gif"><img src="webarena/14-WebArena-303-pass.gif" width="400" alt="WebArena 303"></a><br><sub>✅ #303 · GitLab</sub></td></tr>
+<tr><td align="center" valign="top" width="50%"><a href="webarena/15-WebArena-446-pass.gif"><img src="webarena/15-WebArena-446-pass.gif" width="400" alt="WebArena 446"></a><br><sub>✅ #446 · GitLab</sub></td><td align="center" valign="top" width="50%"><a href="webarena/16-WebArena-747-pass.gif"><img src="webarena/16-WebArena-747-pass.gif" width="400" alt="WebArena 747"></a><br><sub>✅ #747 · GitLab</sub></td></tr>
+</table>
+
+动作和用时的口径同上。GIF 底部是这一步的动作说明（英文），最后一帧是 agent 给出的最终回答。
+
+题目原文（英文）：
+
+- #29：In the DIY forum, get the username and post title of the most recent post, and count the number of comments on that post that are not from the author and have more downvotes than upvotes. Return a list of objects with keys "username", "post_title", and "count".
+- #597：Subscribe to the "consoles" forum from the page of the most controversial post in that forum.
+- #603：Post my question with the title "safe and budget apartment to live in nyc", in a forum where I'm likely to get an answer
+- #303：How many commits did Kilian make during 2023 in the current repository?
+- #446：Assign the issue regarding 404 errors in a11yproject to Roshanjossey.
+- #747：Start a private project called "awesome_web_agents" with blank template and add Abishek, Vinta as members

@@ -13,7 +13,7 @@ https://github.com/user-attachments/assets/91742f28-88c4-4841-836b-79258e86e439
 <sub>视频里的任务只有一段话：在 Chrome 登录智谱 BigModel → 到 iPhone 短信里读验证码填回去 → 截图账户余额 → 发到 Mac 微信的「文件传输助手」。
 原速 7 分 58 秒，在 3 个应用之间切换，33 步操作，0 次人工干预（视频为加速剪辑）。</sub>
 
-**MobileWorld 官方榜 77.78%（GUI-only 总榜第二）· WebArena-Verified Hard 集 88.3%**，全程只用 DeepSeek V4.1 Flash。
+**MobileWorld 官方榜 77.78%（GUI-only 总榜第二）· WebArena-Verified Hard 子集 pass@1 73.6%**，全程只用 DeepSeek V4.1 Flash。
 
 ## 两种模式
 
@@ -31,7 +31,9 @@ https://github.com/user-attachments/assets/91742f28-88c4-4841-836b-79258e86e439
 也能在 iPhone 上跨 App 查信息，比如从小红书找书店合集，再到大众点评查评分和人均。
 
 **后台静默**适合可以交出去慢慢跑的事：在 Android 上跨 App 搜同一款商品比价，在浏览器里下五子棋、
-到商品后台逐件填表上架新品，也能处理电商网站的前台和管理后台（WebArena-Verified<table align="center">
+到商品后台逐件填表上架新品，也能处理电商前台与管理后台、论坛和 GitLab 上的任务（WebArena-Verified 的 Hard 题）。
+
+<table align="center">
   <tr>
     <td align="center" valign="top" rowspan="2"><b>前台 · iPhone</b><br><sub>小红书找书店，大众点评查评分</sub><br><img src="docs/assets/example-iphone.gif" width="190" alt="前台接管示例：iPhone 上小红书找书店，大众点评查评分"></td>
     <td align="center" valign="top" rowspan="2"><b>后台 · Android</b><br><sub>三个购物 App 比价</sub><br><img src="docs/assets/example-android.gif" width="190" alt="后台静默示例：Android 上三个购物 App 比价"></td>
@@ -63,10 +65,10 @@ flash 模型也会点错、看错、自作主张。dpsk-cua 不赌模型每一�
 | 基准 | 范围 | 结果 |
 | --- | --- | --- |
 | MobileWorld | Android，GUI-only 子集 | **91/117（77.78%）**，[已上官方榜单](https://github.com/Tongyi-MAI/MobileWorld/issues/68) |
-| WebArena-Verified | Shopping / Shopping Admin，Hard 集 | **98/111（88.3%）** |
+| WebArena-Verified | Hard 子集 | **190/258（73.6%）** |
 
 MobileWorld 成绩已收录在 [MobileWorld 榜单](https://github.com/Tongyi-MAI/MobileWorld)，GUI-only 总榜第二。
-两个基准各抽样 10 条运行轨迹的回放和官方评分见 [benchmarks/](benchmarks/README.md)。
+两个基准的抽样运行轨迹回放（MobileWorld 10 条；WebArena-Verified 16 条，覆盖 Shopping、Shopping Admin、Reddit、GitLab）和官方评分见 [benchmarks/](benchmarks/README.md)。
 
 ## 看得见、停得下、查得到
 
