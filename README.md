@@ -44,8 +44,6 @@ https://github.com/user-attachments/assets/91742f28-88c4-4841-836b-79258e86e439
   </tr>
 </table>
 
-多选图片验证码"> |
-
 以上都是真实运行的回放，每一帧是一步操作，底部文字是模型自己写的这一步说明。
 
 ## 为什么便宜的模型也能做对
@@ -84,31 +82,31 @@ MobileWorld 成绩已收录在 [MobileWorld 榜单](https://github.com/Tongyi-MA
 
 ## 安装和使用
 
-dpsk-cua 是一个本地 MCP 服务（命令和服务名都叫 `seek-use`），界面操作在你的电脑上运行，模型服务由你自己配置，截图只发给你配置的模型服务。
+dpsk-cua 是一个本地 MCP 服务（命令和服务名都叫 `dpsk-cua`），界面操作在你的电脑上运行，模型服务由你自己配置，截图只发给你配置的模型服务。
 
 **1. 安装。** 需要 [uv](https://docs.astral.sh/uv/getting-started/installation/)，Python 3.11 由 uv 自动准备：
 
 ```sh
-uv tool install --python 3.11 "seek-use[browser] @ https://github.com/hyechow/dpsk-cua/releases/download/v0.1.0a1/seek_use-0.1.0a1-cp311-cp311-macosx_11_0_arm64.whl"
+uv tool install --python 3.11 "dpsk-cua[browser] @ https://github.com/hyechow/dpsk-cua/releases/download/v0.1.0a2/dpsk_cua-0.1.0a2-cp311-cp311-macosx_11_0_arm64.whl"
 uvx --from playwright==1.60.0 playwright install chromium
 ```
 
-要操作 Android，把 `[browser]` 换成 `[browser,android]`。装好后终端里就有 `seek-use` 命令，`which seek-use` 能看到它的完整路径。
+要操作 Android，把 `[browser]` 换成 `[browser,android]`。装好后终端里就有 `dpsk-cua` 命令，`which dpsk-cua` 能看到它的完整路径。
 以后升级：用新版本的链接再运行一次 `uv tool install --force ...`。
 
 **2. 配置模型。** 模型设置从环境变量读取，写进 shell 配置（如 `~/.zshrc`）或在启动宿主前导出：
 
 | 变量 | 值 |
 | --- | --- |
-| `SEEK_USE_MODEL` | `deepseek-flash`，即 DeepSeek V4.1 Flash，上面的基准成绩用的就是它 |
-| `SEEK_USE_BASE_URL` | 模型服务地址，OpenAI 兼容接口，如 `https://your-api.example/v1` |
-| `SEEK_USE_API_KEY` | 你的 API Key |
-| `SEEK_USE_BACKEND` | 默认 `deepseek`；使用通用 Chat Completions 接口时设为 `chat_completions` |
+| `DPSK_CUA_MODEL` | `deepseek-flash`，即 DeepSeek V4.1 Flash，上面的基准成绩用的就是它 |
+| `DPSK_CUA_BASE_URL` | 模型服务地址，OpenAI 兼容接口，如 `https://your-api.example/v1` |
+| `DPSK_CUA_API_KEY` | 你的 API Key |
+| `DPSK_CUA_BACKEND` | 默认 `deepseek`；使用通用 Chat Completions 接口时设为 `chat_completions` |
 
 检查一下模型和浏览器是否就绪：
 
 ```sh
-seek-use check browser
+dpsk-cua check browser
 ```
 
 **3. 接到你的 AI 助手。**
@@ -116,44 +114,52 @@ seek-use check browser
 - **DeepSeek Harness**：一条命令写好 dsh 的 MCP 配置和审批插件（任务在真实浏览器或设备上运行前会先问你）：
 
   ```sh
-  seek-use setup deepseek-harness
+  dpsk-cua setup deepseek-harness
   ```
 
-- **Claude Code**：项目根目录的 `.mcp.json` 或 `claude --mcp-config` 用的配置文件里加入（`command` 换成 `which seek-use` 的输出）：
+- **Claude Code**：项目根目录的 `.mcp.json` 或 `claude --mcp-config` 用的配置文件里加入（`command` 换成 `which dpsk-cua` 的输出）：
 
   ```json
   {
     "mcpServers": {
-      "seek-use": {
-        "command": "/Users/you/.local/bin/seek-use",
+      "dpsk-cua": {
+        "command": "/Users/you/.local/bin/dpsk-cua",
         "env": {
-          "SEEK_USE_MODEL": "${SEEK_USE_MODEL}",
-          "SEEK_USE_BASE_URL": "${SEEK_USE_BASE_URL}",
-          "SEEK_USE_API_KEY": "${SEEK_USE_API_KEY}",
-          "SEEK_USE_BACKEND": "${SEEK_USE_BACKEND}"
+          "DPSK_CUA_MODEL": "${DPSK_CUA_MODEL}",
+          "DPSK_CUA_BASE_URL": "${DPSK_CUA_BASE_URL}",
+          "DPSK_CUA_API_KEY": "${DPSK_CUA_API_KEY}",
+          "DPSK_CUA_BACKEND": "${DPSK_CUA_BACKEND}"
         }
       }
     }
   }
   ```
 
-- **Codex**：在 `~/.codex/config.toml` 里加入（`command` 同样换成 `which seek-use` 的输出）：
+- **Codex**：在 `~/.codex/config.toml` 里加入（`command` 同样换成 `which dpsk-cua` 的输出）：
 
   ```toml
-  [mcp_servers.seek-use]
-  command = "/Users/you/.local/bin/seek-use"
-  env_vars = ["SEEK_USE_MODEL", "SEEK_USE_BASE_URL", "SEEK_USE_API_KEY", "SEEK_USE_BACKEND"]
+  [mcp_servers.dpsk-cua]
+  command = "/Users/you/.local/bin/dpsk-cua"
+  env_vars = ["DPSK_CUA_MODEL", "DPSK_CUA_BASE_URL", "DPSK_CUA_API_KEY", "DPSK_CUA_BACKEND"]
   tool_timeout_sec = 120
   ```
 
-- **命令行**：不接宿主也能直接跑一个任务：`seek-use run browser "查询北京今天的天气"`。
+- **命令行**：不接宿主也能直接跑一个任务：`dpsk-cua run browser "查询北京今天的天气"`。
+
+服务提供三个任务工具：
+
+| 工具 | 模式 | 操作什么 |
+| --- | --- | --- |
+| `desktop_task` | 前台接管 | Mac 上的应用窗口和 iPhone 镜像，一个任务可以在多个应用和 iPhone 之间切换 |
+| `browser_task` | 后台静默 | 默认启动独立的 headless Chromium，也可以连接已有浏览器 |
+| `android_task` | 后台静默 | Android 真机或模拟器，通过网络 adb 连接 |
 
 **4. 说一句话。** 重启宿主后，直接在对话里输入：
 
-> 使用 seek-use，在独立浏览器中查询北京今天的天气。
+> 使用 dpsk-cua，在独立浏览器中查询北京今天的天气。
 
-第一次用前台接管之前，要在「系统设置 → 隐私与安全性」里给运行 seek-use 的应用（终端或宿主应用）
-打开**屏幕录制**和**辅助功能**权限，`seek-use check macos` 会告诉你缺哪一项。
+第一次用前台接管之前，要在「系统设置 → 隐私与安全性」里给运行 dpsk-cua 的应用（终端或宿主应用）
+打开**屏幕录制**和**辅助功能**权限，`dpsk-cua check desktop` 会告诉你缺哪一项。
 
 ## 许可证
 
